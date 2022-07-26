@@ -1,3 +1,9 @@
 <app-header></app-header>
-<app-event-filters></app-event-filters>
-<app-event-list [eventList]="eventList"></app-event-list>
+<div fxLayout="column" fxLayoutAlign="space-around center" class="find-event-container" >
+
+    <app-search></app-search>
+
+    <app-event-filters></app-event-filters>
+
+    <app-event-list [eventList]="eventList"></app-event-list>
+</div>

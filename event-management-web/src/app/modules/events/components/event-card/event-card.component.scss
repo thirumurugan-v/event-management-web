@@ -1,7 +1,16 @@
 .event-card {
     max-width: 500px;
     max-height: 250px;
+    margin-bottom: 5px;
 }
 
+.event-card .event-name{
+    margin-bottom: 20px !important;
+}
+  
 
+.event-card .event-date{
+    margin-bottom: 20px !important;
+    font-size: 16px !important;
+}
   

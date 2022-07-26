@@ -1,0 +1,24 @@
+<form [formGroup]="form" fxLayout="row" class="filters-container">
+    <mat-form-field class="example-form-field" appearance="outline">
+        <mat-label>Search keyword</mat-label>
+        <input matInput type="text" formControlName="keyword">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Location"
+               matInput
+               [formControl]="locationControl"
+               [matAutocomplete]="auto" (blur)="checkLocation()">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="locationClick($event)" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.location}}
+          </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    
+    <button mat-fab color="primary" (click)="searchEvents()">
+        <mat-icon>search</mat-icon>
+    </button>
+</form>

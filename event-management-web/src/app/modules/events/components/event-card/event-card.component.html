@@ -1,8 +1,8 @@
 <mat-card class="event-card">
     <mat-card-title-group>
         <img mat-card-md-image style="border-radius:10px" src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
-        <mat-card-title class="margin-bottom-20">{{eventData.name}}</mat-card-title>
-        <mat-card-title class="margin-bottom-20">{{eventData.startTime}}</mat-card-title>
+        <mat-card-title class="event-name">{{eventData.name}}</mat-card-title>
+        <mat-card-title class="event-date">{{eventData.startTime | date:'EEE, MMMM d, h:mm:ss a'}}</mat-card-title>
         <mat-card-subtitle>{{eventData.groupName}}</mat-card-subtitle>
     </mat-card-title-group>
     <mat-card-content>
