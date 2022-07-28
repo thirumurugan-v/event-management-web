@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from 'src/app/modules/shared/services/config.service';
 import { Observable } from 'rxjs';
 import { EventListDto } from '../../models/event-list-dto';
+import { SearchEventRequest } from '../../models/search-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class EventHttpService {
   }
 
   // makes http get api call to get the event list dto
-  public getEventList(): Observable<EventListDto>{
+  public getEventList(eventSearchRequestData : SearchEventRequest): Observable<EventListDto>{
     var apiURL = this.apiBaseURL + 'Event/GetEvents?city=stockholm';
 
     return this.httpClient.get<EventListDto>(apiURL);

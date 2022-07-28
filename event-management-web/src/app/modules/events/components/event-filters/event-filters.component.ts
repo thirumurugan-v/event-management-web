@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { categoryList, dateList, typeList } from '../../constants/select-options'
+import { eventFilters } from '../../models/search-filter';
 
 @Component({
   selector: 'app-event-filters',
@@ -9,6 +10,8 @@ import { categoryList, dateList, typeList } from '../../constants/select-options
 })
 export class EventFiltersComponent implements OnInit {
 
+  @Output() applyFilters = new EventEmitter<eventFilters>();
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -27,4 +30,8 @@ export class EventFiltersComponent implements OnInit {
     type: this.typeControl,
     category: this.categoryControl,
   });
+
+  filterChanged() {
+    this.applyFilters.emit({ dateId: this.form.controls.date.value, typeId: this.form.controls.type.value, categoryId: this.form.controls.category.value } as eventFilters );
+  }
 }

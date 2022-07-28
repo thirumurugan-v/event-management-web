@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div fxLayout="column" fxLayoutAlign="space-around center" class="find-event-container" >
 
-    <app-search></app-search>
+    <app-search (searchEvent)="triggerSearch($event)"></app-search>
 
-    <app-event-filters></app-event-filters>
+    <app-event-filters (applyFilters)="applyFilters($event)"></app-event-filters>
 
     <app-event-list [eventList]="eventList"></app-event-list>
 </div>

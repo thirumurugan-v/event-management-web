@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap, startWith, map} from 'rxjs/operators';
 import { LocationDto } from '../../../shared/models/location-list-dto';
 import { LocationHttpService } from '../../../shared/services/location-http.service';
+import { searchEvent } from '../../models/search-filter';
 
 @Component({
   selector: 'app-search',
@@ -12,12 +13,14 @@ import { LocationHttpService } from '../../../shared/services/location-http.serv
 })
 export class SearchComponent implements OnInit {
 
+  @Output() searchEvent = new EventEmitter<searchEvent>();
+
   constructor(
     private locationHttpService: LocationHttpService) { }
 
   filteredOptions!: Observable<LocationDto[]>;
   selectedLocation = '';
-  locationControl = new FormControl('');
+  locationControl = new FormControl();
   form = new FormGroup({
     keyword: new FormControl(),
     location: this.locationControl
@@ -49,12 +52,11 @@ export class SearchComponent implements OnInit {
 
   // #TO-DO make api call on the search button click
   searchEvents(){
-    console.log(this.form.controls.keyword.value);
-    console.log(this.form.controls.location.value);
+    this.searchEvent.emit({ keyword: this.form.controls.keyword.value!, locationId: this.form.controls.location.value!.id } as searchEvent );
   }
   
   displayFn(location: LocationDto): string {
-    if(location != undefined && location != null){
+    if(location !== undefined && location !== null){
       this.selectedLocation = location.location;
       return location.location;
     } else 

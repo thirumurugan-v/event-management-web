@@ -1,7 +1,7 @@
 <form [formGroup]="form" fxLayout="row" class="filters-container">
     <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
-      <mat-select [formControl]="dateControl" name="date">
+      <mat-select [formControl]="dateControl" name="date" (selectionChange)="filterChanged()">
         <mat-option *ngFor="let date of dateList" [value]="date.key">
           {{date.value}}
         </mat-option>
@@ -9,7 +9,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
-      <mat-select [formControl]="typeControl" name="type">
+      <mat-select [formControl]="typeControl" name="type" (selectionChange)="filterChanged()">
         <mat-option *ngFor="let type of typeList" [value]="type.key">
           {{type.value}}
         </mat-option>
@@ -17,7 +17,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Category</mat-label>
-      <mat-select [formControl]="categoryControl" name="category">
+      <mat-select [formControl]="categoryControl" name="category" (selectionChange)="filterChanged()">
         <mat-option *ngFor="let category of categoryList" [value]="category.key">
           {{category.value}}
         </mat-option>
