@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { categoryList, dateList, typeList } from '../../constants/select-options'
 import { eventFilters } from '../../models/search-filter';
+import { SelectOption } from '../../models/select-option-model';
+import { CategoryDataService } from '../../services/data/category-data.service';
 
 @Component({
   selector: 'app-event-filters',
@@ -11,15 +13,19 @@ import { eventFilters } from '../../models/search-filter';
 export class EventFiltersComponent implements OnInit {
 
   @Output() applyFilters = new EventEmitter<eventFilters>();
-  
-  constructor() { }
+
+  constructor(private categoryDataService: CategoryDataService) { }
 
   ngOnInit(): void {
+    this.categoryDataService.getCategoryList()
+    .subscribe((result) => {
+      this.categoryList = result;
+    })
   }
 
   dateList = dateList;
   typeList = typeList;
-  categoryList = categoryList;
+  categoryList : SelectOption[] = [];
 
   dateControl = new FormControl(dateList[0].key);
   typeControl = new FormControl(typeList[0].key);

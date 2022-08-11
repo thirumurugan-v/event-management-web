@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Event } from '../../models/event';
 import { eventFilters, searchEvent, SearchEventRequest } from '../../models/search-filter';
+import { CategoryDataService } from '../../services/data/category-data.service';
 import { EventDataService } from '../../services/data/event-data.service';
 
 @Component({
@@ -23,10 +24,12 @@ export class FindEventsComponent implements OnInit, OnDestroy {
   private eventDataSubscription: Subscription = new Subscription;
 
   constructor(
-    private eventDataService: EventDataService) { }
+    private eventDataService: EventDataService,
+    private categoryDataService: CategoryDataService) { }
 
   ngOnInit(): void {
     this.getEvents();
+    this.categoryDataService.retrieveCategoryList();
   }
 
   ngOnDestroy(): void {
