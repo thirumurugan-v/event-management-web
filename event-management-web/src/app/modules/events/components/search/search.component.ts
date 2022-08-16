@@ -47,22 +47,22 @@ export class SearchComponent implements OnInit {
        )
     }
     else
-      return of([]); 
+      return of([]);
    }
 
   // #TO-DO make api call on the search button click
   searchEvents(){
-    this.searchEvent.emit({ keyword: this.form.controls.keyword.value!, locationId: this.form.controls.location.value!.id } as searchEvent );
+    this.searchEvent.emit({ keyword: this.form.controls.keyword.value, locationId: this.form.controls.location.value?.id } as searchEvent );
   }
-  
+
   displayFn(location: LocationDto): string {
     if(location !== undefined && location !== null){
       this.selectedLocation = location.location;
       return location.location;
-    } else 
+    } else
     return ''
   }
-  
+
   // holds the selected location for validation check
   locationClick(event: any) {
     this.selectedLocation = event.option.value;
@@ -77,5 +77,5 @@ export class SearchComponent implements OnInit {
     }
    }, 200);
   }
-  
+
 }

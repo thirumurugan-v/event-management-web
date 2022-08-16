@@ -46,7 +46,7 @@ export class FindEventsComponent implements OnInit, OnDestroy {
   }
 
   triggerSearch(filters: searchEvent){
-    this.eventSearchRequestData.keyword = filters.keyword;
+    this.eventSearchRequestData.keyword = filters.keyword ?? '';
     this.eventSearchRequestData.locationId = filters.locationId;
 
     this.eventDataService.retrieveEventList(this.eventSearchRequestData);

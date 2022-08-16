@@ -18,8 +18,8 @@ export class EventHttpService {
 
   // makes http get api call to get the event list dto
   public getEventList(eventSearchRequestData : SearchEventRequest): Observable<EventListDto>{
-    var apiURL = this.apiBaseURL + 'Event/GetEvents?city=stockholm';
+    var apiURL = this.apiBaseURL + 'Event/GetEvents';
 
-    return this.httpClient.get<EventListDto>(apiURL);
+    return this.httpClient.post<EventListDto>(apiURL, eventSearchRequestData);
   }
 }

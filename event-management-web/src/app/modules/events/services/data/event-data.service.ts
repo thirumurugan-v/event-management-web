@@ -18,6 +18,7 @@ export class EventDataService {
   // make the api call and publish the response to the Event list observable.
   public retrieveEventList(eventSearchRequestData : SearchEventRequest){
     this.eventHttpService.getEventList(eventSearchRequestData).subscribe((result: EventListDto) => {
+      this.eventList = [];
       this.MapEventData(result);
       this.eventList$.next(this.eventList);
     });

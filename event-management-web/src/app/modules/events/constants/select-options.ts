@@ -6,7 +6,7 @@ export const dateList: any[] = [
     {key: '4', value: 'This week'},
     {key: '5', value: 'This weekend'},
     {key: '6', value: 'Next week'},
-    {key: '7', value: 'Custom'}
+    // {key: '7', value: 'Custom'}
 ];
 
 export const typeList: any[] = [
