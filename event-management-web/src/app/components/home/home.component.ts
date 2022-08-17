@@ -16,4 +16,8 @@ export class HomeComponent implements OnInit {
   searchEvents(){
     this.router.navigate(['/events/find']);
   }
+
+  goToCreateGroup(){
+    this.router.navigate(['/group/create']);
+  }
 }

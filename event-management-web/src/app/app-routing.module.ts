@@ -9,6 +9,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/events/events.module')
       .then(mod => mod.EventsModule)
   },
+  {
+    path: 'group',
+    loadChildren: () => import('./modules/group/group.module')
+      .then(mod => mod.GroupModule)
+  },
 ];
 
 @NgModule({
