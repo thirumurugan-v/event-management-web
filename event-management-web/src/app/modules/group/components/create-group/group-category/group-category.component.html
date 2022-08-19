@@ -1,0 +1,18 @@
+<form [formGroup]="formGroup">
+    <mat-form-field appearance="fill" class="form-field-margin">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryControl" multiple>
+            <mat-option 
+                *ngFor="let category of categoryList" [value]="category.key">
+                {{category.value}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.touched && formGroup.hasError('required')">
+            Please select at least one category.
+        </mat-error>
+    </mat-form-field>
+    <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+</form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SelectOption } from 'src/app/modules/events/models/select-option-model';
 import { CategoryDataService } from 'src/app/modules/events/services/data/category-data.service';
 
@@ -10,32 +10,28 @@ import { CategoryDataService } from 'src/app/modules/events/services/data/catego
 })
 export class CreateGroupComponent implements OnInit {
 
-  firstFormGroup = this.formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this.formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-
   categoryList : SelectOption[] = [];
   locationControl = new FormControl(null, Validators.required);
-  createGroup = new FormGroup({
-    'location' : new FormGroup({
-      locationControl: this.locationControl
-    }),
-    'category' : new FormGroup({
-      categoryControl: new FormControl(Validators.required)
-    }),
-    'name' : new FormGroup({
-      nameControl: new FormControl(null, Validators.required)
-    }),
-    'description' : new FormGroup({
-      descriptionControl: new FormControl(null, Validators.required)
-    }),
-    'terms' : new FormGroup({
-      termsControl: new FormControl(null, Validators.required)
-    }),
-  })
+  
+  firstStep : FormGroup = this.formBuilder.group({
+    locationControl: ['', Validators.required]
+  });
+
+  secondStep = this.formBuilder.group({
+    categoryControl: ['', Validators.required]
+  });
+
+  thirdStep = this.formBuilder.group({
+    nameControl: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
+  });
+
+  fourthStep = this.formBuilder.group({
+    descriptionControl: ['',  [Validators.required, Validators.minLength(100), Validators.maxLength(4000)]]
+  });
+
+  fifthStep = this.formBuilder.group({
+    termsControl: [false, Validators.requiredTrue]
+  });
 
   constructor(private formBuilder: FormBuilder,
     private categoryDataService: CategoryDataService) {}
@@ -48,5 +44,4 @@ export class CreateGroupComponent implements OnInit {
       this.categoryList = result;
     })
   }
-
 }

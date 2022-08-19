@@ -1,73 +1,29 @@
 <app-header></app-header>
 
 <div>
-    <form [formGroup]="createGroup">
-        
-        <mat-vertical-stepper [linear]='true' #stepper>
-            <mat-step formGroupName="location" [stepControl]="createGroup.get('location')!">
-                <ng-template matStepLabel>Enter your group's location</ng-template>
-                <location-autocomplete [locationControl]="locationControl"></location-autocomplete>
-                <div>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                </div>
-            </mat-step>
-            <mat-step formGroupName="category" [stepControl]="createGroup.get('category')!" label="Select the category of your group">
-                <mat-form-field appearance="fill">
-                    <mat-label>Category</mat-label>
-                    <mat-select formControlName="categoryControl" multiple>
-                        <mat-option [disabled]="createGroup.get('category')!.get('categoryControl')!.value!.length > 2"
-                            *ngFor="let category of categoryList" [value]="category.key">
-                            {{category.value}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                </div>
-            </mat-step>
-            <mat-step formGroupName="name" [stepControl]="createGroup.get('name')!">
-                <ng-template matStepLabel>Enter your group's name</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Last name, First name" formControlName="nameControl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                </div>
-            </mat-step>
-            <mat-step formGroupName="description" [stepControl]="createGroup.get('description')!">
-                <ng-template matStepLabel>Describe your group</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Last name, First name" formControlName="descriptionControl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                </div>
-            </mat-step>
-            <mat-step formGroupName="terms" [stepControl]="createGroup.get('terms')!">
-                <ng-template matStepLabel>Terms & Conditions</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Last name, First name" formControlName="termsControl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                </div>
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p>Click submit to complete the group creation.</p>
-                <div>
-                    <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
-                    <button mat-raised-button color="primary" matStepperPrevious>Submit</button>
-                </div>
-            </mat-step>
-        </mat-vertical-stepper>
-
-    </form>
+    <mat-vertical-stepper [linear]='false' #stepper>
+        <mat-step [stepControl]="firstStep" label="Enter your group's location">
+            <create-group-location [formGroup]="firstStep" [locationControl]="locationControl"></create-group-location>
+        </mat-step>
+        <mat-step [stepControl]="secondStep" label="Select the category of your group">
+            <create-group-category [formGroup]="secondStep" [categoryList]="categoryList"></create-group-category>
+        </mat-step>
+        <mat-step [stepControl]="thirdStep" label="Enter your group's name">
+            <create-group-name [formGroup]="thirdStep"></create-group-name>
+        </mat-step>
+        <mat-step [stepControl]="fourthStep" label="Describe your group">
+            <create-group-description [formGroup]="fourthStep"></create-group-description>
+        </mat-step>
+        <mat-step [stepControl]="fifthStep" label="Terms & Conditions">
+           <create-group-terms [formGroup]="fifthStep"></create-group-terms>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>Click submit to complete the group creation.</p>
+            <div class="button-margin">
+                <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+                <button mat-raised-button color="primary">Submit</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
 </div>

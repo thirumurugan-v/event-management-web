@@ -4,5 +4,14 @@
   
   .mat-form-field {
     margin-top: 16px;
+    width: 400px;
   }
   
+
+.button-margin {
+  margin-top: 10px;
+  }
+  
+  .button-margin > button:first-child{
+    margin-right: 20px;
+  }

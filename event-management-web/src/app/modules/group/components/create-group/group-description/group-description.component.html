@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup">
+    <mat-form-field appearance="fill" class="form-field-margin">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Describe the group..." formControlName="descriptionControl"></textarea>
+        <mat-error *ngIf="formGroup.hasError('minlength') || formGroup.hasError('maxlength')">
+            Name must be at least 100 and maximum of 4000 characters long.
+        </mat-error>
+    </mat-form-field>
+    <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+</form>
