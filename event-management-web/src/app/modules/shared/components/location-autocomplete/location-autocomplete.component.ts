@@ -12,6 +12,7 @@ import { LocationHttpService } from '../../services/location-http.service';
 export class LocationAutocompleteComponent implements OnInit {
 
   @Input() locationControl!: FormControl;
+  @Input() width!: number;
   
   filteredOptions!: Observable<LocationDto[]>;
   selectedLocation = '';

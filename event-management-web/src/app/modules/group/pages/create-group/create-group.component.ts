@@ -14,7 +14,7 @@ export class CreateGroupComponent implements OnInit {
   locationControl = new FormControl(null, Validators.required);
   
   firstStep : FormGroup = this.formBuilder.group({
-    locationControl: ['', Validators.required]
+    locationControl: this.locationControl
   });
 
   secondStep = this.formBuilder.group({
@@ -43,5 +43,9 @@ export class CreateGroupComponent implements OnInit {
     .subscribe((result) => {
       this.categoryList = result;
     })
+  }
+
+  submit(){
+    debugger;
   }
 }

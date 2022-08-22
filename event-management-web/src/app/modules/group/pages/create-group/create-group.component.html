@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<div>
-    <mat-vertical-stepper [linear]='false' #stepper>
+<div class="create-group-section">
+    <mat-stepper [linear]='true' #stepper>
         <mat-step [stepControl]="firstStep" label="Enter your group's location">
             <create-group-location [formGroup]="firstStep" [locationControl]="locationControl"></create-group-location>
         </mat-step>
@@ -22,8 +22,8 @@
             <p>Click submit to complete the group creation.</p>
             <div class="button-margin">
                 <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
-                <button mat-raised-button color="primary">Submit</button>
+                <button mat-raised-button color="primary" (click)="submit()">Submit</button>
             </div>
         </mat-step>
-    </mat-vertical-stepper>
+    </mat-stepper>
 </div>

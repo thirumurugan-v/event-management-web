@@ -2,8 +2,11 @@
     <mat-form-field appearance="fill" class="form-field-margin">
         <mat-label>Name</mat-label>
         <input matInput placeholder="Group name" formControlName="nameControl">
-        <mat-error *ngIf="formGroup.hasError('minlength') || formGroup.hasError('maxlength')">
+        <mat-error *ngIf="formGroup.get('nameControl')!.hasError('minlength') || formGroup.get('nameControl')!.hasError('maxlength')">
             Name must be at least 3 and maximum of 50 characters long.
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('nameControl')!.hasError('required')">
+            Please enter the name.
         </mat-error>
     </mat-form-field>
     <div>

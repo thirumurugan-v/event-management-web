@@ -1,7 +1,11 @@
-<location-autocomplete [locationControl]="locationControl"></location-autocomplete>
-<mat-error *ngIf="formGroup.touched && formGroup.hasError('required')">
-    Please select the location.
-</mat-error>
-<div>
-    <button mat-raised-button color="primary" matStepperNext>Next</button>
-</div>
+<form [formGroup]="formGroup">
+    <div class="form-field-margin">
+        <location-autocomplete [locationControl]="locationControl" [width]="500"></location-autocomplete>
+        <mat-error *ngIf="formGroup.get('locationControl')!.touched && formGroup.get('locationControl')!.hasError('required')">
+            Please select the location.
+        </mat-error>
+        <div>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </div>
+</form>

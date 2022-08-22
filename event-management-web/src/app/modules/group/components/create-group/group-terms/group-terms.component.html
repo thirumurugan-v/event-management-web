@@ -1,11 +1,11 @@
 <form [formGroup]="formGroup">
     <div class="form-field-margin">
         <section class="section">
-            <mat-checkbox formControlName="termsControl" class="section-checkbox">
-                <p>I agree to the <a href="https://www.w3schools.com">Terms & Conditions</a></p>
+            <mat-checkbox formControlName="termsControl" class="section-checkbox" color="primary">
+                <p>I agree to the <a href="">Terms & Conditions</a></p>
             </mat-checkbox>
         </section>
-        <mat-error *ngIf="formGroup.hasError('required')">
+        <mat-error *ngIf="formGroup.get('termsControl')!.hasError('required')">
             Required
         </mat-error>
     </div>
