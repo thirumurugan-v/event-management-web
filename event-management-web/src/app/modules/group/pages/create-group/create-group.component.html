@@ -6,7 +6,7 @@
             <create-group-location [formGroup]="firstStep" [locationControl]="locationControl"></create-group-location>
         </mat-step>
         <mat-step [stepControl]="secondStep" label="Select the category of your group">
-            <create-group-category [formGroup]="secondStep" [categoryList]="categoryList"></create-group-category>
+            <create-group-category [formGroup]="secondStep"></create-group-category>
         </mat-step>
         <mat-step [stepControl]="thirdStep" label="Enter your group's name">
             <create-group-name [formGroup]="thirdStep"></create-group-name>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SelectOption } from 'src/app/modules/events/models/select-option-model';
-import { CategoryDataService } from 'src/app/modules/events/services/data/category-data.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { createGroupAction } from '../../store/group.actions';
+import { selectCreateGroupError, selectCreateGroupSuccess } from '../../store/group.selector';
+import { State } from '../../store/group.state';
 
 @Component({
   selector: 'app-create-group',
@@ -10,7 +12,6 @@ import { CategoryDataService } from 'src/app/modules/events/services/data/catego
 })
 export class CreateGroupComponent implements OnInit {
 
-  categoryList : SelectOption[] = [];
   locationControl = new FormControl(null, Validators.required);
   
   firstStep : FormGroup = this.formBuilder.group({
@@ -33,19 +34,26 @@ export class CreateGroupComponent implements OnInit {
     termsControl: [false, Validators.requiredTrue]
   });
 
+  createGroupIsSuccess$ = this.store.select(selectCreateGroupSuccess);
+  createGroupError$ = this.store.select(selectCreateGroupError);
+
   constructor(private formBuilder: FormBuilder,
-    private categoryDataService: CategoryDataService) {}
+    private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.categoryDataService.retrieveCategoryList();
-    
-    this.categoryDataService.getCategoryList()
-    .subscribe((result) => {
-      this.categoryList = result;
+    this.createGroupIsSuccess$.subscribe((result)=> {
+      if(result != undefined){
+        var test = result;
+        debugger;
+      }
+    })
+
+    this.createGroupError$.subscribe(()=> {
+      debugger;
     })
   }
 
   submit(){
-    debugger;
+    this.store.dispatch(createGroupAction({ groupData : {name: 'name', groupCategory: [1, 2], description: 'desc', location: 123}}));
   }
 }

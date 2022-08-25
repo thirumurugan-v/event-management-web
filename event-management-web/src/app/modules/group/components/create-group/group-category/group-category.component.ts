@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SelectOption } from 'src/app/modules/events/models/select-option-model';
+import { CategoryDataService } from 'src/app/modules/events/services/data/category-data.service';
 
 @Component({
   selector: 'create-group-category',
@@ -10,11 +11,17 @@ import { SelectOption } from 'src/app/modules/events/models/select-option-model'
 export class GroupCategoryComponent implements OnInit {
 
   @Input() formGroup!: FormGroup;
-  @Input() categoryList!: SelectOption[];
+
+  categoryList : SelectOption[] = [];
   
-  constructor() { }
+  constructor(private categoryDataService: CategoryDataService) { }
 
   ngOnInit(): void {
+    this.categoryDataService.retrieveCategoryList();
+    
+    this.categoryDataService.getCategoryList()
+    .subscribe((result) => {
+      this.categoryList = result;
+    })
   }
-
 }

@@ -18,6 +18,12 @@ import { GroupNameComponent } from './components/create-group/group-name/group-n
 import { GroupDescriptionComponent } from './components/create-group/group-description/group-description.component';
 import { GroupTermsComponent } from './components/create-group/group-terms/group-terms.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { StoreModule } from '@ngrx/store';
+import { groupReducer } from './store/group.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../../../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { GroupEffects } from './store/group.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     FlexLayoutModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    StoreModule.forRoot({ createGroup: groupReducer}),
+    EffectsModule.forRoot([GroupEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ]
 })
 export class GroupModule { }
