@@ -6,3 +6,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .margin-bottom-20{
     margin-bottom: 20px !important;
 }
+
+.snackbar {
+    background: white;
+    color: black;
+}
+.snackbar button {
+    background-color: black;
+    color: white;
+    border: none;
+}

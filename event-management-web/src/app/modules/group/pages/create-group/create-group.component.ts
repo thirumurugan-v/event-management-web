@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { createGroupAction } from '../../store/group.actions';
 import { selectCreateGroupError, selectCreateGroupSuccess } from '../../store/group.selector';
 import { State } from '../../store/group.state';
@@ -38,18 +40,26 @@ export class CreateGroupComponent implements OnInit {
   createGroupError$ = this.store.select(selectCreateGroupError);
 
   constructor(private formBuilder: FormBuilder,
-    private store: Store<State>) {}
+    private router: Router,
+    private store: Store<State>,
+    private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.createGroupIsSuccess$.subscribe((result)=> {
       if(result != undefined){
-        var test = result;
-        debugger;
+        this.snackbarService.showMessage('Your Group \'' + this.thirdStep.controls['nameControl'].value + '\' Successfully Created.');
+
+        setTimeout(() => {
+          // redirecting to home page, but needs to be changed to details page of the group.
+          this.router.navigate(["../../"]);
+        }, 2000);
       }
     })
 
-    this.createGroupError$.subscribe(()=> {
-      debugger;
+    this.createGroupError$.subscribe((err)=> {
+      if(err != undefined){
+        this.snackbarService.showMessage('Unable to create the group. Please try again.')
+      }
     })
   }
 
