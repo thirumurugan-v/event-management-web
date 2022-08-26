@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { CreateGroup } from '../../models/create-group';
 import { createGroupAction } from '../../store/group.actions';
 import { selectCreateGroupError, selectCreateGroupSuccess } from '../../store/group.selector';
 import { State } from '../../store/group.state';
@@ -15,13 +16,14 @@ import { State } from '../../store/group.state';
 export class CreateGroupComponent implements OnInit {
 
   locationControl = new FormControl(null, Validators.required);
+  categoryControl = new FormControl([], Validators.required);
   
   firstStep : FormGroup = this.formBuilder.group({
     locationControl: this.locationControl
   });
 
   secondStep = this.formBuilder.group({
-    categoryControl: ['', Validators.required]
+    categoryControl: this.categoryControl
   });
 
   thirdStep = this.formBuilder.group({
@@ -64,6 +66,12 @@ export class CreateGroupComponent implements OnInit {
   }
 
   submit(){
-    this.store.dispatch(createGroupAction({ groupData : {name: 'name', groupCategory: [1, 2], description: 'desc', location: 123}}));
+    var group : CreateGroup = {
+      name: this.thirdStep.controls['nameControl'].value,
+      groupCategory : this.secondStep.controls['categoryControl'].value,
+      description: this.fourthStep.controls['descriptionControl'].value,
+      location: this.firstStep.controls['locationControl'].value,
+    };
+    this.store.dispatch(createGroupAction({ groupData: group }));
   }
 }
